@@ -1,4 +1,4 @@
-"""que_ans_app URL Configuration
+"""bitchatapplication URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
@@ -13,9 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+
+from django.conf.urls import url, patterns, include
+from django.contrib.auth.models import User, Group
 from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('questions.urls')),
+    url(r'^', include('answers.urls')),
+    url(r'^', include('multi_choice.urls')),
 ]

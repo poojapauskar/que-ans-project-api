@@ -24,6 +24,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'questions',
+    'answers',
+    'multi_choice',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,8 +66,22 @@ WSGI_APPLICATION = 'que_ans_app.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 import dj_database_url
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd5f6m1jqevht1e',                      
+        'USER': 'phqgehmloymakz',
+        'PASSWORD': 'W4O7bxu2I1RKtTmO4MuMeRIay5',
+        'HOST': 'ec2-184-73-196-82.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 }
+
+# if os.environ.get('DATABASE_URL', None):
+#     import dj_database_url
+#     DATABASES['default'] = dj_database_url.config()
+
+
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 
 # Internationalization
