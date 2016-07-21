@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'answers',
     'multi_choice',
     'get_random_que',
+    'que_ans_list',
 )
 
 MIDDLEWARE_CLASSES = (

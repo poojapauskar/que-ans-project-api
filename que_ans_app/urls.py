@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^', include('answers.urls')),
     url(r'^', include('multi_choice.urls')),
     url(r'^', include('get_random_que.urls')),
+    url(r'^', include('que_ans_list.urls')),
 ]
