@@ -30,18 +30,19 @@ def JSONResponse(data = None, status = StatusCode.OK):
     else:
         return HttpResponse(status = StatusCode.NOT_FOUND)
 
-
-
-def get_queryset(request):
-
-  multiple_que= Questions.objects.filter(types="multiple")
-  true_false_que= Questions.objects.filter(types="true_false")
-  input_que= Questions.objects.filter(types="input")
+class Get_random_que(generics.ListCreateAPIView):
+ def get(self, request, *args, **kwargs):
 
   import sys
-  print sys.stderr, multiple_que
-  print sys.stderr, true_false_que
-  print sys.stderr, input_que
+  print sys.stderr, request.META.get('HTTP_MULTI'),
+  print sys.stderr, request.META.get('HTTP_INPUT'),
+
+  my_string1 = request.META.get('HTTP_MULTI')
+  my_list1 = my_string1.split(",")
+
+  my_string2 = request.META.get('HTTP_INPUT')
+  my_list2 = my_string2.split(",")
+
   
   fields = []
 
@@ -49,42 +50,53 @@ def get_queryset(request):
   fields2=[]
   fields3=[]
 
-  for obj1 in multiple_que:
-      fields1.append(
-              {
-               'question_id':obj1.id,
-               'question':obj1.question,
-               'options':(json.dumps(list(Multi_choice.objects.filter(question_id=obj1.id).values_list('options')))).replace('"','').replace('[','').replace(']',''),  
-               }
-            )
 
-  for obj2 in true_false_que:
+  
+  for index in range(len(my_list1)):
+    multiple_que= Questions.objects.filter(types="multiple").filter(pk=my_list1[index])
+    print sys.stderr, "---------multiple_que----------"
+    print sys.stderr, multiple_que
+    for obj1 in multiple_que:
+        fields1.append(
+                {
+                 'question_id':obj1.id,
+                 'question':obj1.question,
+                 'options':(json.dumps(list(Multi_choice.objects.filter(question_id=obj1.id).values_list('options')))).replace('"','').replace('[','').replace(']',''),  
+                 }
+              )
+
+  for index in range(len(my_list2)):
+    input_que= Questions.objects.filter(types="input").filter(pk=my_list2[index])
+    print sys.stderr, "---------input_que----------"
+    print sys.stderr, input_que
+    for obj2 in input_que:
       fields2.append(
               {
-               'question_id':obj1.id,
+               'question_id':obj2.id,
                'question':obj2.question,
               }
             )
 
-  for obj3 in input_que:
-  	  fields3.append(
-              {
-               'question_id':obj3.id,
-               'question':obj3.question,
-              }
-            )
+  import sys
+  print sys.stderr, multiple_que
+  print sys.stderr, input_que
+
 
   fields.append(
-  	     {
-  	     	'multi_choice':fields1,
-  	     	'true_false':fields2,
-  	     	'input':fields3,
-  	     }
-  	)
+         {
+          'multi_choice':fields1,
+          'input':fields2,
+         }
+    )
     
   print >> sys.stderr,"-----------"
   print >> sys.stderr,fields
   print >> sys.stderr,"-----------"
-     
+  
+  import sys
+  from django.http import JsonResponse   
   return JsonResponse((list(fields)),safe=False)
+
+
+
   
