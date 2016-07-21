@@ -11,7 +11,7 @@ STATICFILES_DIRS = (
 SECRET_KEY = 'CanIHazS3cret?Meis1337'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -28,6 +28,7 @@ INSTALLED_APPS = (
     'questions',
     'answers',
     'multi_choice',
+    'get_random_que',
 )
 
 MIDDLEWARE_CLASSES = (
