@@ -48,9 +48,18 @@ class Get_random_que(generics.ListCreateAPIView):
 
   fields1=[]
   fields2=[]
-  fields3=[]
 
-
+  for index1 in range(len(my_list2)):
+    input_que= Questions.objects.filter(types="input").filter(pk=my_list2[index1])
+    print sys.stderr, "---------input_que----------"
+    print sys.stderr, input_que
+    for obj2 in input_que:
+      fields2.append(
+              {
+               'question_id':obj2.id,
+               'question':obj2.question,
+              }
+            )
   
   for index in range(len(my_list1)):
     multiple_que= Questions.objects.filter(types="multiple").filter(pk=my_list1[index])
@@ -65,22 +74,6 @@ class Get_random_que(generics.ListCreateAPIView):
                  }
               )
 
-  for index in range(len(my_list2)):
-    input_que= Questions.objects.filter(types="input").filter(pk=my_list2[index])
-    print sys.stderr, "---------input_que----------"
-    print sys.stderr, input_que
-    for obj2 in input_que:
-      fields2.append(
-              {
-               'question_id':obj2.id,
-               'question':obj2.question,
-              }
-            )
-
-  import sys
-  print sys.stderr, multiple_que
-  print sys.stderr, input_que
-
 
   fields.append(
          {
@@ -89,9 +82,9 @@ class Get_random_que(generics.ListCreateAPIView):
          }
     )
     
-  print >> sys.stderr,"-----------"
-  print >> sys.stderr,fields
-  print >> sys.stderr,"-----------"
+  # print >> sys.stderr,"-----------"
+  # print >> sys.stderr,fields
+  # print >> sys.stderr,"-----------"
   
   import sys
   from django.http import JsonResponse   
