@@ -22,10 +22,7 @@ highlighted = models.TextField()
 # fs = FileSystemStorage(location=settings.STATIC_ROOT)
 
 class Questions(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    question = models.CharField(max_length=100, blank=True,default='')
+    question = models.TextField(blank=True,default='')
     types = models.CharField(max_length=100, blank=True,default='')
-   
-    class Meta:
-        ordering = ('created',)
+
 

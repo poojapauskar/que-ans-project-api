@@ -24,10 +24,8 @@ highlighted = models.TextField()
 # fs = FileSystemStorage(location=settings.STATIC_ROOT)
 
 class Multi_choice(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
     question_id = models.CharField(max_length=100, blank=True,default='')
     options = ArrayField(models.TextField(blank=True, default='',editable=True))
    
-    class Meta:
-        ordering = ('created',)
+    
 
