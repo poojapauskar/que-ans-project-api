@@ -1,4 +1,5 @@
 from questions.models import Questions
+from answers.models import Answers
 from questions.serializers import QuestionsSerializer
 from multi_choice.models import Multi_choice
 from multi_choice.serializers import Multi_choiceSerializer
@@ -69,6 +70,7 @@ class Get_random_que(generics.ListCreateAPIView):
                  'question_id':obj1.id,
                  'question':obj1.question,
                  'options':(json.dumps(list(Multi_choice.objects.filter(question_id=obj1.id).values_list('options')))).replace('"','').replace('[','').replace(']',''),  
+                 'correct_ans':(json.dumps(list(Answers.objects.filter(question_id=obj1.id).values_list('answer')))).replace('"','').replace('[','').replace(']',''), 
                  }
               )
 
@@ -82,6 +84,7 @@ class Get_random_que(generics.ListCreateAPIView):
                  'question_id':obj2.id,
                  'question':obj2.question,
                  'options':(json.dumps(list(Multi_choice.objects.filter(question_id=obj2.id).values_list('options')))).replace('"','').replace('[','').replace(']',''),  
+                 'correct_ans':(json.dumps(list(Answers.objects.filter(question_id=obj2.id).values_list('answer')))).replace('"','').replace('[','').replace(']',''), 
                  }
               )
 
@@ -95,6 +98,7 @@ class Get_random_que(generics.ListCreateAPIView):
                  'question_id':obj3.id,
                  'question':obj3.question,
                  'options':(json.dumps(list(Multi_choice.objects.filter(question_id=obj3.id).values_list('options')))).replace('"','').replace('[','').replace(']',''),  
+                 'correct_ans':(json.dumps(list(Answers.objects.filter(question_id=obj3.id).values_list('answer')))).replace('"','').replace('[','').replace(']',''), 
                  }
               )
 
