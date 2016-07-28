@@ -10,7 +10,7 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Que_ans_list
-        fields = ('pk','name','usn','question_list','answer_list')
+        fields = ('pk','firstname','lastname','email','phone','usn','question_list','answer_list')
         #write_only_fields = ('firstame', 'lastname')
 
     def create(self, validated_data):
@@ -18,7 +18,7 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
         Create and return a new `Snippet` instance, given the validated data.
         """
         
-        objects=Que_ans_list.objects.create(name=validated_data.get('name'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'))
+        objects=Que_ans_list.objects.create(firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'))
         # print >> sys.stderr, objects
         return objects
 

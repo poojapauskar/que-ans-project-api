@@ -43,10 +43,10 @@ class Get_random_que(generics.ListCreateAPIView):
   my_list1 = my_string1.split(",")
 
   my_string2 = request.META.get('HTTP_MULTI2')
-  my_list2 = my_string1.split(",")
+  my_list2 = my_string2.split(",")
 
   my_string3 = request.META.get('HTTP_MULTI3')
-  my_list3 = my_string1.split(",")
+  my_list3 = my_string3.split(",")
 
   my_string4 = request.META.get('HTTP_INPUT')
   my_list4 = my_string4.split(",")

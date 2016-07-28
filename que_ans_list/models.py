@@ -25,7 +25,10 @@ highlighted = models.TextField()
 
 class Que_ans_list(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=100, blank=True,default='')
+    firstname = models.CharField(max_length=100, blank=True,default='')
+    lastname = models.CharField(max_length=100, blank=True,default='')
+    email = models.CharField(max_length=100, blank=True,default='')
+    phone = models.CharField(max_length=100, blank=True,default='')
     usn = models.CharField(max_length=100, blank=True,default='')
     question_list = ArrayField(models.TextField(blank=True, default='',editable=True))
     answer_list = ArrayField(models.TextField(blank=True, default='',editable=True))
