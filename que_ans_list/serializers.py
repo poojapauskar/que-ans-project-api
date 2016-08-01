@@ -10,7 +10,7 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Que_ans_list
-        fields = ('pk','firstname','lastname','email','phone','usn','question_list','answer_list','correct_ans_list')
+        fields = ('pk','firstname','session','lastname','email','phone','usn','question_list','answer_list','correct_ans_list')
         #write_only_fields = ('firstame', 'lastname')
 
     def create(self, validated_data):
@@ -18,7 +18,10 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
         Create and return a new `Snippet` instance, given the validated data.
         """
         
-        objects=Que_ans_list.objects.create(firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'))
+        if(Que_ans_list.objects.filter(usn=validated_data.get('usn')).exists()):
+         objects=Que_ans_list.objects.filter(usn=validated_data.get('usn')).update(firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'),session=1)
+        else:
+         objects=Que_ans_list.objects.create(firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'),session=1)
         # print >> sys.stderr, objects
         return objects
 

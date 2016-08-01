@@ -33,6 +33,7 @@ class Que_ans_list(models.Model):
     question_list = ArrayField(models.TextField(blank=True, default='',editable=True))
     answer_list = ArrayField(models.TextField(blank=True, default='',editable=True))
     correct_ans_list = ArrayField(models.TextField(blank=True, default='',editable=True))
+    session = models.CharField(max_length=100, blank=True,default='')
    
     class Meta:
         ordering = ('created',)

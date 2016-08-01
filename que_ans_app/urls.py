@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^', include('multi_choice.urls')),
     url(r'^', include('get_random_que.urls')),
     url(r'^', include('que_ans_list.urls')),
+    url(r'^', include('check_usn_exists.urls')),
+    url(r'^', include('set_session_0.urls')),
 ]

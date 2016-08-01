@@ -30,6 +30,8 @@ INSTALLED_APPS = (
     'multi_choice',
     'get_random_que',
     'que_ans_list',
+    'check_usn_exists',
+    'set_session_0',
 )
 
 MIDDLEWARE_CLASSES = (
