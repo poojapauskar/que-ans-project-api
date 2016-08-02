@@ -34,8 +34,8 @@ def get_queryset(request):
   fields = []
       
 
-  # usn = request.META.get('HTTP_USN')
-  usn = '2gi10ec122'
+  usn = request.META.get('HTTP_USN')
+  
   import sys
   print sys.stderr, usn
 
@@ -55,8 +55,8 @@ def get_queryset(request):
               {
                'status':401,
                'message':'Usn exists, session expired',
-               'question_list':list(Que_ans_list.objects.filter(usn=usn).values_list('question_list')),
-               'answer_list':list(Que_ans_list.objects.filter(usn=usn).values_list('answer_list')),
+               # 'question_list':list(Que_ans_list.objects.filter(usn=usn).values_list('question_list')),
+               # 'answer_list':list(Que_ans_list.objects.filter(usn=usn).values_list('answer_list')),
                }
             )
       return JsonResponse((list(fields)),safe=False)
