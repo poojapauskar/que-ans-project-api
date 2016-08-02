@@ -55,8 +55,8 @@ def get_queryset(request):
               {
                'status':401,
                'message':'Usn exists, session expired',
-               # 'question_list':list(Que_ans_list.objects.filter(usn=usn).values_list('question_list')),
-               # 'answer_list':list(Que_ans_list.objects.filter(usn=usn).values_list('answer_list')),
+               'question_list':list(Que_ans_list.objects.filter(usn=usn).values_list('question_list')),
+               'answer_list':list(Que_ans_list.objects.filter(usn=usn).values_list('answer_list')),
                }
             )
       return JsonResponse((list(fields)),safe=False)
