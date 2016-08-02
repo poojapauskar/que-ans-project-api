@@ -36,6 +36,10 @@ def get_queryset(request):
 
   usn = request.META.get('HTTP_USN')
   Que_ans_list.objects.filter(usn=usn).update(session=0)
+
+  fields.append({
+        'status':200,
+    })
    
   return JsonResponse((list(fields)),safe=False)
   
