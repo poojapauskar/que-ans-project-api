@@ -4,7 +4,9 @@ from rest_framework import generics
 # from register.permissions import IsOwnerOrReadOnly
 # from rest_framework import permissions
 
-
+class Que_ans_listList(generics.ListAPIView):
+ queryset = Que_ans_list.objects.all()
+ serializer_class = Que_ans_listSerializer
 
 class Que_ans_listDetail(generics.RetrieveUpdateDestroyAPIView):
  queryset = Que_ans_list.objects.all()
@@ -15,7 +17,7 @@ class Que_ans_listDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-class Que_ans_listList(generics.ListCreateAPIView):
+class Update_details(generics.ListCreateAPIView):
  def put(self, request, *args, **kwargs):
   from django.http import JsonResponse
 
@@ -30,6 +32,16 @@ class Que_ans_listList(generics.ListCreateAPIView):
   answer_list= request.data['answer_list']
   correct_ans_list= request.data['correct_ans_list']
   session= request.data['session']
+
+  print sys.stderr, request.data['firstname']
+  print sys.stderr, request.data['lastname']
+  print sys.stderr, request.data['usn']
+  print sys.stderr, request.data['email']
+  print sys.stderr, request.data['phone']
+  print sys.stderr, request.data['question_list']
+  print sys.stderr, request.data['answer_list']
+  print sys.stderr, request.data['correct_ans_list']
+  print sys.stderr, request.data['session']
 
   if(Que_ans_list.objects.filter(usn=usn).exists()):
     objects=Que_ans_list.objects.filter(usn=usn).update(firstname=firstname,lastname=lastname,email=email,phone=phone,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
