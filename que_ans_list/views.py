@@ -43,23 +43,25 @@ class Update_details(generics.ListCreateAPIView):
   print sys.stderr, request.data['correct_ans_list']
   print sys.stderr, request.data['session']
 
-  if(Que_ans_list.objects.filter(usn=usn).exists()):
-    objects=Que_ans_list.objects.filter(usn=usn).update(firstname=firstname,lastname=lastname,email=email,phone=phone,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
-  else:
-    objects=Que_ans_list.objects.create(firstname=firstname,lastname=lastname,email=email,phone=phone,usn=usn,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
 
-  
   details=[]
-  details.append(
+  if(Que_ans_list.objects.filter(usn=usn).filter(session=0)):
+    details.append(
                   {
-                   'status':200,
-                   'message':'User and Order details updated',
+                   'status':400,
+                   'message':'Session expired',
                    # 'result':list(update),
                   }
-                 )  
+                 )
+    from django.http import JsonResponse
+    return JsonResponse(details[0],safe=False)
 
-  
+  else:
+    if(Que_ans_list.objects.filter(usn=usn).exists()):
+      objects=Que_ans_list.objects.filter(usn=usn).update(firstname=firstname,lastname=lastname,email=email,phone=phone,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
+    else:
+      objects=Que_ans_list.objects.create(firstname=firstname,lastname=lastname,email=email,phone=phone,usn=usn,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
 
-  from django.http import JsonResponse
-  return JsonResponse(details[0],safe=False)
+    from django.http import JsonResponse
+    return JsonResponse(details[0],safe=False)
 
