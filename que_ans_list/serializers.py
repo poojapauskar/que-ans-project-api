@@ -10,7 +10,7 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Que_ans_list
-        fields = ('pk','firstname','session','lastname','email','phone','usn','question_list','answer_list','correct_ans_list')
+        fields = ('pk','seconds','firstname','session','lastname','email','phone','usn','question_list','answer_list','correct_ans_list')
         #write_only_fields = ('firstame', 'lastname')
 
     def create(self, validated_data):
@@ -19,9 +19,9 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
         """
         
         if(Que_ans_list.objects.filter(usn=validated_data.get('usn')).exists()):
-         objects=Que_ans_list.objects.filter(usn=validated_data.get('usn')).update(firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'),session=1)
+         objects=Que_ans_list.objects.filter(usn=validated_data.get('usn')).update(seconds=validated_data.get('seconds'),firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'),session=1)
         else:
-         objects=Que_ans_list.objects.create(firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'),session=1)
+         objects=Que_ans_list.objects.create(seconds=validated_data.get('seconds'),firstname=validated_data.get('firstname'),lastname=validated_data.get('lastname'),email=validated_data.get('email'),phone=validated_data.get('phone'),usn=validated_data.get('usn'),question_list=validated_data.get('question_list'),answer_list=validated_data.get('answer_list'),correct_ans_list=validated_data.get('correct_ans_list'),session=1)
         # print >> sys.stderr, objects
         return objects
 
@@ -40,6 +40,7 @@ class Que_ans_listSerializer(serializers.ModelSerializer):
         instance.question_list = validated_data.get('question_list', instance.question_list)
         instance.correct_ans_list = validated_data.get('correct_ans_list', instance.correct_ans_list)
         instance.session = validated_data.get('session', instance.session)
+        instance.seconds = validated_data.get('seconds', instance.seconds)
 
         return instance
 

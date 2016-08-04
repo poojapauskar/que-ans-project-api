@@ -47,6 +47,7 @@ def get_queryset(request):
                'message':'Usn exists, session active',
                'question_list':list(Que_ans_list.objects.filter(usn=usn).values_list('question_list')),
                'answer_list':list(Que_ans_list.objects.filter(usn=usn).values_list('answer_list')),
+               'seconds':list(Que_ans_list.objects.filter(usn=usn).values_list('seconds')),
                }
             )
     	return JsonResponse((list(fields)),safe=False)
@@ -57,6 +58,7 @@ def get_queryset(request):
                'message':'Usn exists, session expired',
                'question_list':list(Que_ans_list.objects.filter(usn=usn).values_list('question_list')),
                'answer_list':list(Que_ans_list.objects.filter(usn=usn).values_list('answer_list')),
+               'seconds':list(Que_ans_list.objects.filter(usn=usn).values_list('seconds')),
                }
             )
       return JsonResponse((list(fields)),safe=False)

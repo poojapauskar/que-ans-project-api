@@ -32,6 +32,7 @@ class Update_details(generics.ListCreateAPIView):
   answer_list= request.data['answer_list']
   correct_ans_list= request.data['correct_ans_list']
   session= request.data['session']
+  seconds= request.data['seconds']
 
   print sys.stderr, request.data['firstname']
   print sys.stderr, request.data['lastname']
@@ -42,6 +43,7 @@ class Update_details(generics.ListCreateAPIView):
   print sys.stderr, request.data['answer_list']
   print sys.stderr, request.data['correct_ans_list']
   print sys.stderr, request.data['session']
+  print sys.stderr, request.data['seconds']
 
 
   details=[]
@@ -58,10 +60,23 @@ class Update_details(generics.ListCreateAPIView):
 
   else:
     if(Que_ans_list.objects.filter(usn=usn).exists()):
-      objects=Que_ans_list.objects.filter(usn=usn).update(firstname=firstname,lastname=lastname,email=email,phone=phone,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
+      objects=Que_ans_list.objects.filter(usn=usn).update(seconds=seconds,firstname=firstname,lastname=lastname,email=email,phone=phone,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
+      details.append(
+                  {
+                   'status':200,
+                   'message':'Data saved',
+                   # 'result':list(update),
+                  }
+                 )
     else:
-      objects=Que_ans_list.objects.create(firstname=firstname,lastname=lastname,email=email,phone=phone,usn=usn,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
-
+      objects=Que_ans_list.objects.create(seconds=seconds,firstname=firstname,lastname=lastname,email=email,phone=phone,usn=usn,question_list=question_list,answer_list=answer_list,correct_ans_list=correct_ans_list,session=1)
+      details.append(
+                  {
+                   'status':200,
+                   'message':'Data saved',
+                   # 'result':list(update),
+                  }
+                 )
     from django.http import JsonResponse
     return JsonResponse(details[0],safe=False)
 
