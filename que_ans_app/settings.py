@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'que_ans_list',
     'check_usn_exists',
     'set_session_0',
+    'deactivate_all_sessions',
 )
 
 MIDDLEWARE_CLASSES = (
