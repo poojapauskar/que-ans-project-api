@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'check_usn_exists',
     'set_session_0',
     'deactivate_all_sessions',
+    'check_session_is_0',
 )
 
 MIDDLEWARE_CLASSES = (

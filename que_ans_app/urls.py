@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^', include('check_usn_exists.urls')),
     url(r'^', include('set_session_0.urls')),
     url(r'^', include('deactivate_all_sessions.urls')),
+    url(r'^', include('check_session_is_0.urls')),
 ]

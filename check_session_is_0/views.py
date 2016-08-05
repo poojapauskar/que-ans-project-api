@@ -30,16 +30,27 @@ def JSONResponse(data = None, status = StatusCode.OK):
 
 
 def get_queryset(request):
-  value = request.META.get('HTTP_VALUE')
-
-  Que_ans_list.objects.filter(session=1).update(session=value)
-  
+  usn = request.META.get('HTTP_USN')
   fields = []
-  fields.append(
+
+  if(Que_ans_list.objects.filter(usn=usn).filter(session=0)):
+  	fields.append(
+          {
+           'status':400
+          }
+        )
+  else:
+  	fields.append(
           {
            'status':200
           }
         )
+
+  import sys
+  print sys.stderr, fields
+  
+  
+  
     
   return JsonResponse((list(fields)),safe=False)
   
